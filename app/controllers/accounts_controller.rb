@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :find_account, only: [:show, :edit, :update]
+  before_action :find_account, only: %i[show edit update destroy]
 
   def index
     @accounts = Account.all
@@ -26,6 +26,11 @@ class AccountsController < ApplicationController
 
   def update
     @account.update(account_params)
+    redirect_to accounts_path
+  end
+
+  def destroy
+    @account.destroy
     redirect_to accounts_path
   end
 
