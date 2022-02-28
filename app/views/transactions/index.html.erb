@@ -1,5 +1,8 @@
 <h1>Transactions</h1>
 
-<% @transactions.each do |transaction| %>
-  <%= transaction.amount %>
-<% end %>
+<div>
+  <% @transactions.each do |transaction| %>
+    <p><%= transaction.amount %></p>
+    <p><%= link_to 'Editer la transaction', edit_account_transaction_path(transaction.account_id, transaction.id) %></p>
+  <% end %>
+</div>
