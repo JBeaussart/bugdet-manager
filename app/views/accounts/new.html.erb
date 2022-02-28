@@ -3,8 +3,6 @@
     <div class="row rounded">
       <div class="col-6 m-auto w-50 rounded p-4 border bg-transparen">
         <h3 class="title-new-equipment mb-3 font-weight-bold">Ajouter un compte</h3>
-
-        <!-- Formulaire de nouvel équipement -->
         <%= simple_form_for [ @account ] do |f| %>
           <%= f.input :bank, label: 'Banque' %>
           <%= f.input :name, label: 'Dénomination du compte' %>
