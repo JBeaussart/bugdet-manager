@@ -1,11 +1,11 @@
 class AccountsController < ApplicationController
+  before_action :find_account, only: [:show]
+
   def index
     @accounts = Account.all
   end
 
-  def show
-    @account = Account.find(params[:id])
-  end
+  def show; end
 
   def new
     @account = Account.new
@@ -23,6 +23,10 @@ class AccountsController < ApplicationController
   end
 
   private
+
+  def find_account
+    @account = Account.find(params[:id])
+  end
 
   def account_params
     params.require(:account).permit(:name, :bank, :fund)
