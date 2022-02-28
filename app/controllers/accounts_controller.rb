@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :find_account, only: [:show]
+  before_action :find_account, only: [:show, :edit, :update]
 
   def index
     @accounts = Account.all
@@ -20,6 +20,13 @@ class AccountsController < ApplicationController
       puts @account.user
       render :new
     end
+  end
+
+  def edit; end
+
+  def update
+    @account.update(account_params)
+    redirect_to accounts_path
   end
 
   private
