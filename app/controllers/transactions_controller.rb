@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
-  before_action :find_account, only: %i[new edit update]
-  before_action :find_transaction, only: %i[edit update]
+  before_action :find_account, only: %i[new edit update destroy]
+  before_action :find_transaction, only: %i[edit update destroy]
 
   def index
     @transactions = Transaction.where(account_id: current_user.accounts.ids)
@@ -24,6 +24,11 @@ class TransactionsController < ApplicationController
 
   def update
     @transaction.update(transaction_params)
+    redirect_to account_transactions_path(@account)
+  end
+
+  def destroy
+    @transaction.destroy
     redirect_to account_transactions_path(@account)
   end
 
