@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :find_account, only: %i[new edit update destroy]
+  before_action :find_account, only: %i[new create edit update destroy]
   before_action :find_transaction, only: %i[edit update destroy]
 
   def index
@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction.account = current_user.accounts.ids
+    @transaction.account_id = @account.id
     if @transaction.save
       redirect_to account_transactions_path
     else
