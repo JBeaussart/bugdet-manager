@@ -1,7 +1,5 @@
 <% @accounts.each do |account| %>
-  <h1><%= account.name %></h1>
+  <h1><%= link_to account.name, account_path(account) %></h1>
   <h3><%= account.bank %></h3>
-  <h3>Solde: <%= account.fund %></h3>
+  <h3>Solde: <%= account.fund %>€</h3>
 <% end %>
-
-
