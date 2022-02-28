@@ -1,1 +1,7 @@
-<h1>hello</h1>
+<% @accounts.each do |account| %>
+  <h1><%= account.name %></h1>
+  <h3><%= account.bank %></h3>
+  <h3>Solde: <%= account.fund %></h3>
+<% end %>
+
+
