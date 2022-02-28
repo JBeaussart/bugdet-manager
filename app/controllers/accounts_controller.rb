@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   before_action :find_account, only: %i[show edit update destroy]
 
   def index
-    @accounts = Account.all
+    @accounts = Account.where(user: current_user)
   end
 
   def show; end
