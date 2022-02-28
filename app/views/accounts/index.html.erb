@@ -1,0 +1,10 @@
+<% @accounts.each do |account| %>
+  <h1><%= link_to account.name, account_path(account) %></h1>
+  <h3><%= account.bank %></h3>
+  <h3>Solde: <%= account.fund %>€</h3>
+  <p><%= link_to 'Supprimer le compte', account_path(account), method: 'delete' %></p>
+<% end %>
+
+<%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %>
+
+

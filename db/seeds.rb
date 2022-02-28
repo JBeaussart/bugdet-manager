@@ -9,5 +9,6 @@ user1 = User.create!(email: 'user@gmail.com', password: 'password', first_name: 
 
 puts '---------------------'
 puts 'Creating Account'
-Account.create!(bank: "Caisse d'épargne", name: 'Compte courrant', fund: 0, user: user1)
+Account.create!(bank: "Caisse d'épargne", name: 'Compte courrant', fund: 652, user: user1)
+Account.create!(bank: "BNP", name: 'Compte commun', fund: 1235, user: user1)
 puts '---------------------'

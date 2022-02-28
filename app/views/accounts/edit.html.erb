@@ -1,0 +1,15 @@
+<div class="position-relative">
+  <div class="container">
+    <div class="row rounded">
+      <div class="col-6 m-auto w-50 rounded p-4 border bg-transparen">
+        <h3 class="title-new-equipment mb-3 font-weight-bold">Ajouter un compte</h3>
+        <%= simple_form_for [ @account ] do |f| %>
+          <%= f.input :bank, label: 'Banque' %>
+          <%= f.input :name, label: 'Dénomination du compte' %>
+          <%= f.submit "Valider", class: "btn btn-success" %>
+          <%= link_to "Annuler", accounts_path, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
