@@ -1,0 +1,10 @@
+<h1>Transactions</h1>
+
+<div>
+  <% @transactions.each do |transaction| %>
+    <p><%= transaction.amount %></p>
+    <p><%= link_to 'Editer la transaction', edit_account_transaction_path(transaction.account_id, transaction.id) %></p>
+    <p></p>
+    <%= link_to 'Supprimer la transaction', account_transaction_path(transaction.account_id, transaction.id), method: 'delete' %>
+  <% end %>
+</div>

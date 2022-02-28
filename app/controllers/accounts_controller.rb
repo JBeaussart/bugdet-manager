@@ -17,7 +17,6 @@ class AccountsController < ApplicationController
     if @account.save
       redirect_to accounts_path
     else
-      puts @account.user
       render :new
     end
   end

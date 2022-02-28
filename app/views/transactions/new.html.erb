@@ -1,0 +1,17 @@
+<div class="position-relative">
+  <div class="container">
+    <div class="row rounded">
+      <div class="col-6 m-auto w-50 rounded p-4 border bg-transparen">
+        <h3 class="title-new-equipment mb-3 font-weight-bold">Ajouter une transaction</h3>
+        <%= simple_form_for [ @account, @transaction ] do |f| %>
+          <%= f.input :date, label: 'Date' %>
+          <%= f.input :amount, label: 'Montant' %>
+          <%= f.input :tag, label: 'Ajouter un tag' %>
+          <%= f.input :comment, label: 'Ajouter un commentaire' %>
+          <%= f.submit "Valider", class: "btn btn-success" %>
+          <%= link_to "Annuler", account_transactions_path, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
