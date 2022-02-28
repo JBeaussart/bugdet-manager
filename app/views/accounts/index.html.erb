@@ -3,3 +3,5 @@
   <h3><%= account.bank %></h3>
   <h3>Solde: <%= account.fund %>€</h3>
 <% end %>
+
+<%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %>
