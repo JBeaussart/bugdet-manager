@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     @account.user = current_user
     if @account.save
-      redirect_to accounts_path
+      redirect_to root_path
     else
       render :new
     end
