@@ -5,7 +5,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= account.name %></h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= account.bank %></h6>
-          <p class="card-text">Vous avez actuellement sur votre compte: <%= account.fund.round(2) %>€</p>
+          <p class="card-text">Solde: <%= account.fund.round(2) %>€</p>
           <p class="card-text m-5">
             <% account.transactions.each do |transaction| %>
               <p><%= transaction.date.strftime("%d/%m/%Y") %>: <%= transaction.tag %> <%= transaction.amount %>€</p>
