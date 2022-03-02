@@ -1,12 +1,38 @@
-<h1>Transactions</h1>
-
-<div>
-  <% @transactions.each do |transaction| %>
-    <p><%= transaction.amount %></p>
-    <p><%= link_to 'Editer la transaction', edit_account_transaction_path(transaction.account_id, transaction.id) %></p>
-    <p></p>
-    <%= link_to 'Supprimer la transaction', account_transaction_path(transaction.account_id, transaction.id), method: 'delete' %>
-  <% end %>
-  <p><%= link_to 'Ajouter une transaction', new_account_transaction_path, class: 'btn btn-primary' %></p>
-
+<div class="container">
+  <h1 class="mb-4">Transactions</h1>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Montant</th>
+          <th scope="col">Catégorie</th>
+          <th scope="col">Commentaire</th>
+          <th scope="col">Editer</th>
+          <th scope="col">Supprimer</th>
+        </tr>
+      </thead>
+      <% @transactions.each do |transaction| %>
+      <tbody>
+        <tr>
+          <th scope="row"><%= transaction.date.strftime("%d/%m/%Y") %></th>
+          <td><%= transaction.amount %></td>
+          <td><%= transaction.tag %></td>
+          <td><%= transaction.comment %></td>
+          <td>
+            <%= link_to edit_account_transaction_path(transaction.account_id, transaction.id) do %>
+              <i class="fas fa-edit"></i>
+              <% end %>
+            </td>
+          <td>
+            <%= link_to account_transaction_path(transaction.account_id, transaction.id), method: 'delete' do %>
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+    <p><%= link_to 'Ajouter une transaction', new_account_transaction_path, class: 'btn btn-primary' %></p>
+  </div>
 </div>
