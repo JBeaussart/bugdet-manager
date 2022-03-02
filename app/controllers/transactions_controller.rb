@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
   before_action :find_transaction, only: %i[edit update destroy]
 
   def index
-    @transactions = Transaction.where(account_id: current_user.accounts.ids)
+    @transactions = Transaction.where(account_id: find_account)
   end
 
   def new
