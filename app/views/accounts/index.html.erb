@@ -1,10 +1,23 @@
-<% @accounts.each do |account| %>
-  <h1><%= link_to account.name, account_path(account) %></h1>
-  <h3><%= account.bank %></h3>
-  <h3>Solde: <%= account.fund %>€</h3>
-  <p><%= link_to 'Supprimer le compte', account_path(account), method: 'delete' %></p>
-<% end %>
-
-<%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %>
-
-
+<div class="container">
+  <div class="row d-flex justify-content-around">
+    <% @accounts.each do |account| %>
+      <div class="card p-3" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= account.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= account.bank %></h6>
+          <p class="card-text">Solde: <%= account.fund.round(2) %>€</p>
+          <p class="card-text m-5">
+            <% account.transactions.each do |transaction| %>
+              <p><%= transaction.date.strftime("%d/%m/%Y") %>: <%= transaction.tag %> <%= transaction.amount %>€</p>
+            <% end %>
+          </p>
+          <div class='d-flex justify-content-between'>
+            <a href="#" class="card-link"><%= link_to 'Voir le détail', account_transactions_path(account) %></a>
+            <a href="#" class="card-link"><%= link_to 'Ajouter une transaction', new_account_transaction_path(account) %></a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <p class="mt-5 text-center"><%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %></p>
+</div>
