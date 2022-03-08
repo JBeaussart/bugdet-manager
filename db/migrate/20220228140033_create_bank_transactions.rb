@@ -1,8 +1,8 @@
-class CreateTransactions < ActiveRecord::Migration[6.1]
+class CreateBankTransactions < ActiveRecord::Migration[6.1]
   def change
-    create_table :transactions do |t|
+    create_table :bank_transactions do |t|
       t.datetime :date
-      t.integer :amount
+      t.float :amount
       t.string :tag
       t.text :comment
       t.references :account, null: false, foreign_key: true

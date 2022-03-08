@@ -2,7 +2,6 @@ puts '---------------------'
 puts 'Cleaning database'
 User.destroy_all
 Account.destroy_all
-Transaction.destroy_all
 
 puts '---------------------'
 puts 'Creating Users'

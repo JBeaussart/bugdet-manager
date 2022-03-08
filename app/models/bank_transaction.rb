@@ -1,4 +1,4 @@
-class Transaction < ApplicationRecord
+class BankTransaction < ApplicationRecord
   belongs_to :account
   validates :date, presence: true
   validates :amount, presence: true
