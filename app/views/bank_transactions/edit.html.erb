@@ -7,7 +7,11 @@
         <%= f.input :date, as: :date, html5: true %>
         <%= f.input :amount, label: 'Montant' %>
         <div class="d-flex flex-column w-100 my-4">
-          <%= f.select :tag, options_for_select(['Logement', 'Alimentation']) %>
+          <% if f.object.tag == "" %>
+            <%= f.select :tag, options_for_select(['Logement', 'Alimentation']), include_blank: "Selectionner un categorie" %>
+          <% else %>
+            <%= f.select :tag, options_for_select(['Logement', 'Alimentation'], selected: f.object.tag) %>
+          <% end %>
         </div>
         <%= f.input :comment, label: 'Ajouter un commentaire' %>
         <%= f.submit "Valider", class: "btn btn-success" %>
