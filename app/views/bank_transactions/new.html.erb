@@ -6,7 +6,9 @@
         <%= simple_form_for [ @account, @bank_transaction ] do |f| %>
           <%= f.input :date, label: 'Date' %>
           <%= f.input :amount, label: 'Montant' %>
-          <%= f.input :tag, label: 'Ajouter un tag' %>
+          <div class="d-flex flex-column w-100 my-4">
+            <%= f.select :tag, options_for_select(['Logement', 'Alimentation']), include_blank: "Selectionner un categorie" %>
+          </div>
           <%= f.input :comment, label: 'Ajouter un commentaire' %>
           <%= f.submit "Valider", class: "btn btn-success" %>
           <%= link_to "Annuler", account_bank_transactions_path, class: "btn btn-danger" %>
