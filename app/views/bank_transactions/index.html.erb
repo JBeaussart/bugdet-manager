@@ -12,20 +12,20 @@
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <% @bank_transactions.each do |transaction| %>
+      <% @bank_transactions.each do |bank_transaction| %>
       <tbody>
         <tr>
-          <th scope="row"><%= transaction.date.strftime("%d/%m/%Y") %></th>
-          <td><%= transaction.amount %></td>
-          <td><%= transaction.tag %></td>
-          <td><%= transaction.comment %></td>
+          <th scope="row"><%= bank_transaction.date.strftime("%d/%m/%Y") %></th>
+          <td><%= bank_transaction.amount %></td>
+          <td><%= bank_transaction.tag %></td>
+          <td><%= bank_transaction.comment %></td>
           <td>
-            <%= link_to edit_account_bank_transaction_path(transaction.account_id, transaction.id) do %>
+            <%= link_to edit_account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id) do %>
               <i class="fas fa-edit"></i>
               <% end %>
             </td>
           <td>
-            <%= link_to account_bank_transaction_path(transaction.account_id, transaction.id), method: 'delete' do %>
+            <%= link_to account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id), method: 'delete' do %>
               <i class="fa fa-trash" aria-hidden="true"></i>
             <% end %>
           </td>
