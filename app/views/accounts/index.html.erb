@@ -1,23 +1,21 @@
 <div class="container">
-  <div class="row d-flex justify-content-around">
+  <div class="row d-flex justify-content-center">
     <% @accounts.each do |account| %>
-      <div class="card p-3" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title"><%= account.name %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><%= account.bank %></h6>
-          <p class="card-text">Solde: <%= account.fund.round(2) %>€</p>
-          <p class="card-text m-5">
-            <% account.bank_transactions.each do |bank_transaction| %>
-              <p><%= bank_transaction.date.strftime("%d/%m/%Y") %>: <%= bank_transaction.tag %> <%= bank_transaction.amount %>€</p>
-            <% end %>
-          </p>
-          <div class='d-flex justify-content-between'>
-            <a href="#" class="card-link"><%= link_to 'Voir le détail', account_bank_transactions_path(account) %></a>
-            <a href="#" class="card-link"><%= link_to 'Ajouter une transaction', new_account_bank_transaction_path(account) %></a>
-          </div>
-        </div>
-      </div>
+    <div class="account-card">
+      <h3 class="account-card-name"><%= account.name %></h3>
+      <p class="account-card-bank"><%= account.bank %></p>
+      <p>Dernière transactions</p>
+      <% account.bank_transactions.first(3).each do |bank_transaction| %>
+      <p class="account-card-transaction"><%= link_to "#{bank_transaction.date.strftime("%d/%m/%Y")}: #{bank_transaction.tag} #{bank_transaction.amount}€", edit_account_bank_transaction_path(account, bank_transaction) %>
+      </p>
+      <% end %>
+      <p class="account-card-fund">Solde: <%= account.fund %>€</p>
+      <p class="account-card-btn-details"><%= link_to 'Détail', account_bank_transactions_path(account, account.bank_transactions), class: "btn btn-success" %></p>
+    </div>
     <% end %>
+    <p class="mt-5 text-center"><%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %></p>
   </div>
-  <p class="mt-5 text-center"><%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %></p>
 </div>
+
+
+
