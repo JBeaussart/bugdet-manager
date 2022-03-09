@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :find_account, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!, only: [:home]
 
   def index
     @accounts = Account.where(user: current_user)
