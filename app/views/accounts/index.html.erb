@@ -1,18 +1,20 @@
 <div class="container">
-  <% @accounts.each do |account| %>
+  <div class="row d-flex justify-content-center">
+    <% @accounts.each do |account| %>
     <div class="account-card">
       <h3 class="account-card-name"><%= account.name %></h3>
       <p class="account-card-bank"><%= account.bank %></p>
       <p>Dernière transactions</p>
       <% account.bank_transactions.first(3).each do |bank_transaction| %>
-        <p class="account-card-transaction"><%= link_to "#{bank_transaction.date.strftime("%d/%m/%Y")}: #{bank_transaction.tag} #{bank_transaction.amount}€", edit_account_bank_transaction_path(account, bank_transaction) %>
-        </p>
+      <p class="account-card-transaction"><%= link_to "#{bank_transaction.date.strftime("%d/%m/%Y")}: #{bank_transaction.tag} #{bank_transaction.amount}€", edit_account_bank_transaction_path(account, bank_transaction) %>
+      </p>
       <% end %>
       <p class="account-card-fund">Solde: <%= account.fund %>€</p>
       <p class="account-card-btn-details"><%= link_to 'Détail', account_bank_transactions_path(account, account.bank_transactions), class: "btn btn-success" %></p>
     </div>
-  <% end %>
-  <p class="mt-5 text-center"><%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %></p>
+    <% end %>
+    <p class="mt-5 text-center"><%= link_to 'Ajouter un nouveau compte', new_account_path, class: "btn btn-primary" %></p>
+  </div>
 </div>
 
 
