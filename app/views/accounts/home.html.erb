@@ -1,0 +1,10 @@
+<div class="container text-center h-100">
+  <h1>Account manager</h1>
+  <p>Faire ces comptes n'a jamais été aussi facile !</p>
+
+  <% @accounts.each do |account| %>
+    <h1><%= account.name %></h1>
+  <% end %>
+</div>
+
+

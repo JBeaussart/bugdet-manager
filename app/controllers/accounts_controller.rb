@@ -33,6 +33,10 @@ class AccountsController < ApplicationController
     redirect_to accounts_path
   end
 
+  def home
+    @accounts = Account.where(user: current_user)
+  end
+
   private
 
   def find_account
