@@ -21,4 +21,3 @@ names = ['Compte courrant', 'Livret A', 'PEL', 'Compte commun', 'Livret B']
     BankTransaction.create!(date: Faker::Date.between(from: '2022-01-01', to: '2022-04-30'), amount: Faker::Number.between(from: -400, to: 600), tag: tags.sample, comment: Faker::Lorem.sentence(word_count: 4), account: account)
   end
 end
-
