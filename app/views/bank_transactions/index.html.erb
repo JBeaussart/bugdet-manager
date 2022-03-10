@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container bank-transaction-container">
   <h3>Details des transactions</h3>
   <p class="mb-5 text-muted"><%= @account.name %> (<%= @account.bank %>)</p>
   <div>
@@ -9,22 +9,24 @@
           <th scope="col">Montant</th>
           <th scope="col">Catégorie</th>
           <th class="bank-transaction-comment" scope="col">Commentaire</th>
-          <th class="text-center" scope="col">Editer</th>
-          <th class="text-center" scope="col">Supprimer</th>
+          <th class="text-center" scope="col"></th>
+          <th class="text-center" scope="col"></th>
         </tr>
       </thead>
       <% @bank_transactions.each do |bank_transaction| %>
       <tbody>
         <tr>
-          <th scope="row"><%= bank_transaction.date.strftime("%d/%m/%Y") %></th>
+          <%= link_to account_bank_transaction_path(@account, bank_transaction) do %>
+            <th scope="row"><%= bank_transaction.date.strftime("%d/%m/%Y") %></th>
+          <% end %>
           <td><%= bank_transaction.amount %>€</td>
           <td><%= bank_transaction.tag %></td>
           <td class="bank-transaction-comment"><%= bank_transaction.comment %></td>
           <td class="text-center">
             <%= link_to edit_account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id) do %>
               <i class="fas fa-edit"></i>
-              <% end %>
-            </td>
+            <% end %>
+          </td>
           <td class="text-center">
             <%= link_to account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id), method: 'delete' do %>
               <i class="fa fa-trash" aria-hidden="true"></i>
