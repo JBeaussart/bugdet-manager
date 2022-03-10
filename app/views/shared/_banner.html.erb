@@ -1,0 +1,11 @@
+<div class="banner mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://blog.reedexpo.fr/wp-content/uploads/2020/05/budget-pr%C3%A9visionnel-salon-scaled.jpg);">
+  <div class="container text-center">
+    <h1>Account Manager</h1>
+    <p>Faire ces comptes n'a jamais été aussi simple</p>
+    <% if user_signed_in? %>
+    <%= link_to "Démarrer", new_account_path, class: "btn btn-primary btn-lg" %>
+    <% else %>
+    <%= link_to "Démarrer", new_user_session_path, class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>
