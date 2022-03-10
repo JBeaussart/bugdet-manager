@@ -1,27 +1,11 @@
 <%= render 'shared/banner' %>
 
 <div class="container">
+
   <% if user_signed_in? %>
     <h3 class="text-center">Somme actuel disponible sur vos comptes: <%= @accounts.sum(&:fund) %>€</h3>
   <% end %>
-  <div class="row d-flex justify-content-around">
-    <% @accounts.each do |account| %>
-      <div class="account-card">
-        <h3 class="account-card-name"><%= account.name %></h3>
-        <p class="account-card-bank"><%= account.bank %></p>
-        <% if account.bank_transactions.count > 0 %>
-          <p>Dernière transactions</p>
-        <% end %>
-        <% account.bank_transactions.first(3).each do |bank_transaction| %>
-          <p class="account-card-transaction">
-            <span><%= "#{bank_transaction.date.strftime("%d/%m/%Y")}:" %></span>
-            <span class="account-card-transaction-tag"><%= "#{bank_transaction.tag}" %></span>
-            <span class="account-card-transaction-amount"><%= "#{bank_transaction.amount}€" %></span>
-          </p>
-        <% end %>
-        <p class="account-card-fund">Solde: <%= account.fund.round(2) %>€</p>
-        <p class="account-card-btn-details"><%= link_to 'Détail', account_bank_transactions_path(account, account.bank_transactions), class: "btn btn-success" %></p>
-      </div>
-    <% end %>
-  </div>
+
+  <%= render 'shared/card' %>
+
 </div>
