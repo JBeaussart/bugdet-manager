@@ -8,9 +8,9 @@
           <th scope="col">Date</th>
           <th scope="col">Montant</th>
           <th scope="col">Catégorie</th>
-          <th scope="col">Commentaire</th>
-          <th scope="col">Editer</th>
-          <th scope="col">Supprimer</th>
+          <th class="bank-transaction-comment" scope="col">Commentaire</th>
+          <th class="text-center" scope="col">Editer</th>
+          <th class="text-center" scope="col">Supprimer</th>
         </tr>
       </thead>
       <% @bank_transactions.each do |bank_transaction| %>
@@ -19,13 +19,13 @@
           <th scope="row"><%= bank_transaction.date.strftime("%d/%m/%Y") %></th>
           <td><%= bank_transaction.amount %>€</td>
           <td><%= bank_transaction.tag %></td>
-          <td><%= bank_transaction.comment %></td>
-          <td>
+          <td class="bank-transaction-comment"><%= bank_transaction.comment %></td>
+          <td class="text-center">
             <%= link_to edit_account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id) do %>
               <i class="fas fa-edit"></i>
               <% end %>
             </td>
-          <td>
+          <td class="text-center">
             <%= link_to account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id), method: 'delete' do %>
               <i class="fa fa-trash" aria-hidden="true"></i>
             <% end %>
