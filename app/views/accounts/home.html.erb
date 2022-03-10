@@ -26,7 +26,7 @@
             <span class="account-card-transaction-amount"><%= "#{bank_transaction.amount}€" %></span>
           </p>
         <% end %>
-        <p class="account-card-fund">Solde: <%= account.fund %>€</p>
+        <p class="account-card-fund">Solde: <%= account.fund.round(2) %>€</p>
         <p class="account-card-btn-details"><%= link_to 'Détail', account_bank_transactions_path(account, account.bank_transactions), class: "btn btn-success" %></p>
       </div>
     <% end %>
