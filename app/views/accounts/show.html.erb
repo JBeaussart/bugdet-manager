@@ -12,110 +12,26 @@
       <p><%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</p>
     <% end %>
   </div>
+
+  <div class="amount_month">
+    <h3>Dépense total mensuelle</h3>
+    <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
+    <% months.each_with_index do |month, id| %>
+      <p><%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</p>
+    <% end %>
+  </div>
+
+  <div class="amount_month_tags">
+    <h3>Dépense total mensuelle par tag</h3>
+    <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
+    <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
+    <% months.each_with_index do |month, id| %>
+      <% tags.each do |tag| %>
+        <div>
+          <p>Dépense de <%= month %> pour <%= tag %>: <%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %></p>
+          <p></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-
-<% janvier = 0 %>
-<% février = 0 %>
-<% mars = 0 %>
-<% avril = 0 %>
-<% mai = 0 %>
-<% juin = 0 %>
-<% juillet = 0 %>
-<% aout = 0 %>
-<% septembre = 0 %>
-<% octobre = 0 %>
-<% novembre = 0 %>
-<% décembre = 0 %>
-
-
-<% @account.bank_transactions.each do |el| %>
-  <% d = Date.parse(el.date.to_s) %>
-  <% if d.month == 1 %>
-    <% janvier += el.amount %>
-  <% elsif d.month == 2 %>
-    <% février += el.amount %>
-  <% elsif d.month == 3 %>
-    <% mars += el.amount %>
-  <% elsif d.month == 4 %>
-    <% avril += el.amount %>
-  <% elsif d.month == 5 %>
-    <% mai += el.amount %>
-  <% elsif d.month == 6 %>
-    <% juin += el.amount %>
-  <% elsif d.month == 7 %>
-    <% juillet += el.amount %>
-  <% elsif d.month == 8 %>
-    <% aout += el.amount %>
-  <% elsif d.month == 9 %>
-    <% septembre += el.amount %>
-  <% elsif d.month == 10 %>
-    <% octobre += el.amount %>
-  <% elsif d.month == 11 %>
-    <% novembre += el.amount %>
-  <% elsif d.month == 12 %>
-    <% décembre += el.amount %>
-  <% end %>
-<% end %>
-
-<h3>Restant par mois</h3>
-<p>Janvier: <%= janvier %>€</p>
-<p>Fevrier: <%= février %>€</p>
-<p>mars: <%= mars  %>€</p>
-<p>avril: <%= avril  %>€</p>
-<p>mai: <%= mai  %>€</p>
-<p>juin: <%= juin  %>€</p>
-<p>juillet: <%= juillet  %>€</p>
-<p>aout: <%= aout  %>€</p>
-<p>septembre: <%= septembre  %>€</p>
-<p>octobre: <%= octobre  %>€</p>
-<p>novembre: <%= novembre  %>€</p>
-<p>décembre: <%= décembre  %>€</p>
-
-<%# TODO: dépense par mois par tag %>
-<% janvier_animaux = 0 %>
-<% janvier_revenu = 0 %>
-<% janvier_logement = 0 %>
-<% janvier_vacances = 0 %>
-<% janvier_voiture = 0 %>
-<% janvier_abonnement = 0 %>
-<% janvier_santé = 0 %>
-<% janvier_loisir = 0 %>
-<% janvier_CB = 0 %>
-<% janvier_autre = 0 %>
-
-<% @account.bank_transactions.each do |el| %>
-  <% d = Date.parse(el.date.to_s) %>
-  <% if d.month == 1 && el.tag == 'Animaux'%>
-    <% janvier_animaux += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Revenu'%>
-    <% janvier_revenu += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Logement'%>
-    <% janvier_logement += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Vacances'%>
-    <% janvier_vacances += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Voiture'%>
-    <% janvier_voiture += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Abonnement'%>
-    <% janvier_abonnement += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Santé'%>
-    <% janvier_santé += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Loisir'%>
-    <% janvier_loisir += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'CB'%>
-    <% janvier_CB += el.amount %>
-  <% elsif d.month == 1 && el.tag == 'Autre'%>
-    <% janvier_autre += el.amount %>
-  <% end %>
-<% end %>
-
-<h3>Dépense par mois par tag</h3>
-<p>Dépense animaux pour Janvier: <%= janvier_animaux %>€</p>
-<p>Dépense Logement pour Janvier: <%= janvier_logement %>€</p>
-<p>Dépense Vacances pour Janvier: <%= janvier_vacances %>€</p>
-<p>Dépense Voiture pour Janvier: <%= janvier_voiture %>€</p>
-<p>Dépense Abonnement pour Janvier: <%= janvier_abonnement %>€</p>
-<p>Dépense Santé pour Janvier: <%= janvier_santé %>€</p>
-<p>Dépense Loisir pour Janvier: <%= janvier_loisir %>€</p>
-<p>Dépense CB pour Janvier: <%= janvier_CB %>€</p>
-<p>Dépense Autre pour Janvier: <%= janvier_autre %>€</p>
-<p>Revenu pour Janvier: <%= janvier_revenu %>€</p>
