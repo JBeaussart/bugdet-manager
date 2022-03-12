@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <h3><%= @account.name %> <span class='h6'>(<%= link_to 'Editer votre compte', edit_account_path %> - <%= link_to 'Supprimer le compte', account_path(@account), method: 'delete' %>)</span></h3>
+    <h3><%= @account.name %> <span class='h6'>(<%= link_to 'Editer le compte', edit_account_path %> - <%= link_to 'Supprimer le compte', account_path(@account), method: 'delete' %>)</span></h3>
     <p><%= @account.bank %></p>
   </div>
 
