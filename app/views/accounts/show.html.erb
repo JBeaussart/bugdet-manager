@@ -19,7 +19,7 @@
       <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
       <% months.each_with_index do |month, id| %>
         <% if @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) != 0%>
-        <h3>Dépense totale du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h3>
+          <h3>Dépense totale du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h3>
           <% tags.each do |tag| %>
             <div>
               <p><%= tag %>: <%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %>€</p>
