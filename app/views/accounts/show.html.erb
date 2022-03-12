@@ -5,6 +5,8 @@
   </div>
 
   <p><%= link_to 'Ajouter une transaction', new_account_bank_transaction_path(@account), class:'btn btn-primary' %></p>
+  <%# Revenu annuel + moyenne par mois%>
+  <%# Depense annuel + moyenne par mois %>
 
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
@@ -14,9 +16,26 @@
           <%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€
           <span class="h6 text-muted">≈<%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round(2) %>€ / mois</span>
         </h5>
-
       <% end %>
+      <div>
+        <% revenu = 0 %>
+        <% depense = 0 %>
+        <% @account.bank_transactions.each do |el| %>
+          <% if el.amount.positive? %>
+            <% revenu += el.amount %>
+          <% else %>
+            <% depense += el.amount %>
+          <% end %>
+        <% end %>
+        <hr>
+        <h5>Revenu annuel: <%= revenu %>€</h5>
+        <h5>Dépense annuelle: <%= depense %>€</h5>
+        <hr>
+        <h5>Epargne: <%= revenu + depense %>€</h5>
+      </div>
     </div>
+
+
 
     <div class="amount_month_tags">
       <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
@@ -34,3 +53,5 @@
     </div>
   </div>
 </div>
+
+
