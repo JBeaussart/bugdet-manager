@@ -10,7 +10,11 @@
     <div class="amount_tags">
     <h3>Dépense totale annuelle par catégories</h3>
       <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
-        <p><%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</p>
+        <h5>
+          <%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€
+          <span class="h6 text-muted">≈ <%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round(2) %>€ / mois</span>
+        </h5>
+
       <% end %>
     </div>
 
