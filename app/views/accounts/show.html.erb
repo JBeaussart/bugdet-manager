@@ -8,7 +8,7 @@
 
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
-    <h3>Dépense totale annuelle par catégories</h3>
+    <h3>Total annuel par catégories</h3>
       <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
         <h5>
           <%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€
@@ -23,7 +23,7 @@
       <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
       <% months.each_with_index do |month, id| %>
         <% if @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) != 0%>
-          <h3>Dépense totale du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h3>
+          <h3>Epargne du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h3>
           <% tags.each do |tag| %>
             <div>
               <p><%= tag %>: <%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %>€</p>
