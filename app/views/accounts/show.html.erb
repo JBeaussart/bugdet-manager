@@ -12,7 +12,7 @@
       <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
         <h5>
           <%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€
-          <span class="h6 text-muted">≈ <%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round(2) %>€ / mois</span>
+          <span class="h6 text-muted">≈<%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round(2) %>€ / mois</span>
         </h5>
 
       <% end %>
