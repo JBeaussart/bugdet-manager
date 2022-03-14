@@ -8,7 +8,7 @@
 
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
-    <h3>Total annuel par catégories</h3>
+      <h3>Total annuel par catégories</h3>
       <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
         <h5>
           <%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€
@@ -41,18 +41,22 @@
         <% end %>
       <% end %>
     </div>
+  </div>
 
-    <div class="amount_month_tags">
-      <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
-      <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
+  <button class="my-4 amount_month_tags_details btn btn-primary">Voir le detail</button>
+
+  <div class="amount_month_tags">
+    <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
+    <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
+    <div class="amount_month_tags_details_amount">
       <% months.each_with_index do |month, id| %>
-        <% if @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) != 0%>
-          <h3>Epargne du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h3>
-          <% tags.each do |tag| %>
-            <div>
-              <p><%= tag %>: <%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %>€</p>
-            </div>
-          <% end %>
+        <% if @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) != 0 %>
+          <h5>Epargne du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h5>
+            <% tags.each do |tag| %>
+              <div>
+                <p><%= tag %>: <%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %>€</p>
+              </div>
+            <% end %>
         <% end %>
       <% end %>
     </div>
