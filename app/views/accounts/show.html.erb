@@ -45,25 +45,32 @@
     </div>
 
     <div>
-      <h3>Pourcentage dépense par catégories</h3>
-      <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
+      <% tag_percentage = [] %>
+      <% @account.bank_transactions.map(&:tag).uniq.map do |tag| %>
         <% if @account.bank_transactions.where(tag: tag).sum(&:amount).negative? %>
-          <p><%= tag %>: <%= (@account.bank_transactions.where(tag: tag).sum(&:amount) * 100 / depense).round %>%</p>
+          <% average = (@account.bank_transactions.where(tag: tag).sum(&:amount) * 100 / depense).round %>
+          <% tag_percentage << [tag, average] %>
         <% end %>
       <% end %>
+      <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+      <%= pie_chart(tag_percentage, legend: false, width: "700px", height: "770px", library: {backgroundColor: "#F4F4F4"}, title: "Pourcentage par catégories") %>
     </div>
   </div>
 
   <div class="my-4 amount_month_tags_details btn btn-primary">Voir le detail</div>
 
   <div class="amount_month_tags">
-    <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
+    <% savings = [] %>
+    <% count_saving = 0 %>
+    <% months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'] %>
     <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
     <div class="d-flex flex-wrap justify-content-between align-items-center">
       <% months.each_with_index do |month, id| %>
-        <% if @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) != 0 %>
+        <% saving = @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>
+        <% if saving != 0 %>
+          <% savings << [month, (count_saving += saving)] %>
         <div class="amount_month_tags_details_card mb-3">
-          <h5>Epargne <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h5>
+          <h5>Epargne <%= month %>: <%= saving %>€</h5>
           <table class="table">
             <thead>
               <tr>
@@ -85,5 +92,6 @@
       <% end %>
     </div>
   </div>
+    <%= line_chart savings, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Epargne sur l'année" %>
 </div>
 
