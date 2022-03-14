@@ -9,12 +9,24 @@
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
       <h3>Total annuel par catégories</h3>
-      <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
-        <h5>
-          <%= tag %>: <%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€
-          <span class="h6 text-muted">≈<%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round %>€ / mois</span>
-        </h5>
-      <% end %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Catégorie</th>
+              <th scope="col">Total annuel</th>
+              <th scope="col">Moyenne mensuelle</th>
+            </tr>
+          </thead>
+        <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
+          <tbody>
+            <tr>
+              <td><%= tag %></td>
+              <td><%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</td>
+              <td><%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round %>€</td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
       <div>
         <% revenu = 0 %>
         <% depense = 0 %>
@@ -26,10 +38,10 @@
           <% end %>
         <% end %>
         <hr>
-        <h5>Revenu annuel: <%= revenu %>€</h5>
-        <h5>Dépense annuelle: <%= depense %>€</h5>
+        <p>Revenu annuel: <%= revenu %>€</p>
+        <p>Dépense annuelle: <%= depense %>€</p>
         <hr>
-        <h5>Epargne: <%= revenu + depense %>€</h5>
+        <p>Epargne: <%= revenu + depense %>€</p>
       </div>
     </div>
 
@@ -43,22 +55,36 @@
     </div>
   </div>
 
-  <button class="my-4 amount_month_tags_details btn btn-primary">Voir le detail</button>
+  <div class="my-4 amount_month_tags_details btn btn-primary">Voir le detail</div>
 
   <div class="amount_month_tags">
     <% months = ['Janvier', 'Fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'] %>
     <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
-    <div class="amount_month_tags_details_amount">
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
       <% months.each_with_index do |month, id| %>
         <% if @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) != 0 %>
-          <h5>Epargne du mois de <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h5>
+        <div class="amount_month_tags_details_card mb-3">
+          <h5>Epargne <%= month %>: <%= @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>€</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Montant</th>
+              </tr>
+            </thead>
             <% tags.each do |tag| %>
-              <div>
-                <p><%= tag %>: <%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %>€</p>
-              </div>
+            <tbody>
+              <tr>
+                <td><%= tag %></td>
+                <td><%= @account.bank_transactions.where('extract(month from date) = ? and tag = ?', id + 1, tag).sum(&:amount) %>€</td>
+              </tr>
+            </tbody>
             <% end %>
+          </table>
+        </div>
         <% end %>
       <% end %>
     </div>
   </div>
 </div>
+
