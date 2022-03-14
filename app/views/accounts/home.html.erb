@@ -6,6 +6,35 @@
     <h3 class="text-center">Disponible sur vos comptes: <%= @accounts.sum(&:fund).round(2) %>€</h3>
   <% end %>
 
+
+  <% months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'] %>
+  <% savings = [] %>
+  <% count_saving = 0 %>
+  <% months.each_with_index do |month, id| %>
+    <% @accounts.each do |account| %>
+      <% saving = account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>
+      <% if saving != 0 %>
+        <% savings << [month, saving] %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+
+
+  <% filter_savings = [] %>
+  <% fund_savings = 0 %>
+  <% add_amount = [] %>
+  <% savings.group_by(&:first).map do |month, amount| %>
+    <% filter_savings << [month, [*amount.map(&:last)].sum] %>
+  <% end %>
+
+  <% filter_savings.each do |filter_saving| %>
+    <% fund_savings += filter_saving[1] %>
+    <% add_amount << [filter_saving[0], fund_savings] %>
+  <% end %>
+
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+  <%= line_chart add_amount, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Evolution de votre épargne", loading: "Loading..."  %>
   <%= render 'shared/card' %>
 
 </div>
