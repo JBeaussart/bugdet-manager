@@ -6,7 +6,9 @@ class AccountsController < ApplicationController
     @accounts = Account.where(user: current_user)
   end
 
-  def show; end
+  def show
+    account_variations
+  end
 
   def new
     @account = Account.new
@@ -39,7 +41,14 @@ class AccountsController < ApplicationController
   def find_account
     @account = Account.find(params[:id])
   end
-
+  
+  def account_variations
+    @revenu = 0
+    @depense = 0
+    
+    @account.bank_transactions.each { |el| el.amount.positive? ? @revenu += el.amount : @depense += el.amount}
+  end
+  
   def account_params
     params.require(:account).permit(:name, :bank, :fund)
   end

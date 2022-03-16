@@ -28,19 +28,10 @@
           <% end %>
         </table>
       <div>
-        <% revenu = 0 %>
-        <% depense = 0 %>
-        <% @account.bank_transactions.each do |el| %>
-          <% if el.amount.positive? %>
-            <% revenu += el.amount %>
-          <% else %>
-            <% depense += el.amount %>
-          <% end %>
-        <% end %>
-        <p>Revenu annuel: <%= revenu %>€</p>
-        <p>Dépense annuelle: <%= depense %>€</p>
+        <p>Revenu annuel: <%= @revenu %>€</p>
+        <p>Dépense annuelle: <%= @depense %>€</p>
         <hr>
-        <p>Epargne: <%= revenu + depense %>€</p>
+        <p>Epargne: <%= @revenu + @depense %>€</p>
       </div>
     </div>
 
@@ -48,7 +39,7 @@
       <% tag_percentage = [] %>
       <% @account.bank_transactions.map(&:tag).uniq.map do |tag| %>
         <% if @account.bank_transactions.where(tag: tag).sum(&:amount).negative? %>
-          <% average = (@account.bank_transactions.where(tag: tag).sum(&:amount) * 100 / depense).round %>
+          <% average = (@account.bank_transactions.where(tag: tag).sum(&:amount) * 100 / @depense).round %>
           <% tag_percentage << [tag, average] %>
         <% end %>
       <% end %>
@@ -59,7 +50,5 @@
 
   <%= render 'shared/accounts/show/graph_saving' %>
   <div class="my-4 amount_month_tags_details btn btn-primary">Voir le detail</div>
-
-
 </div>
 
