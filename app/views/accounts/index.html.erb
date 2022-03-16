@@ -1,6 +1,13 @@
+<%= render 'shared/banner' %>
+
 <div class="container">
+
+  <% if user_signed_in? %>
+    <h3 class="text-center">Disponible sur vos comptes: <%= @accounts.sum(&:fund).round(2) %>€</h3>
+  <% end %>
+
+
+  <%= render 'shared/accounts/index/graph' %>
   <%= render 'shared/card' %>
+
 </div>
-
-
-
