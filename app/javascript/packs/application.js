@@ -12,8 +12,11 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+require("custom/navbar_scroll")
+
 import "controllers"
 import "bootstrap"
+import { navbarScroll } from "../custom/navbar_scroll"
 
 // details btn account show
 const button = document.querySelector('.amount_month_tags_details')
@@ -29,12 +32,11 @@ button.addEventListener('click', () => {
   }
 })
 
-// navbar animating
-window.addEventListener("scroll", function () {
-  const navbar = document.querySelector(".navbar-lewagon");
-  navbar.classList.toggle("sticky", window.scrollY > 50);
-});
-
 // chartjs
 require("chartkick")
 require("chart.js")
+
+
+document.addEventListener('turbolinks:load', () => {
+  navbarScroll();
+})
