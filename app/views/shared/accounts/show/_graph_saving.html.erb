@@ -1,13 +1,10 @@
 <div class="amount_month_tags">
-  <% savings = [] %>
   <% count_saving = 0 %>
-  <% months = (I18n.t "date.month_names").map!(&:capitalize) %>
-  <% tags = @account.bank_transactions.map(&:tag).uniq %>
   <div class="d-flex flex-wrap justify-content-between align-items-center">
-    <% months.each_with_index do |month, id| %>
+    <% @months.each_with_index do |month, id| %>
       <% saving = @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>
       <% if saving != 0 %>
-        <% savings << [month, (count_saving += saving)] %>
+        <% @savings << [month, (count_saving += saving)] %>
       <div class="amount_month_tags_details_card mb-3">
         <h5>Epargne <%= month %>: <%= saving %>€</h5>
         <table class="table">
@@ -17,7 +14,7 @@
               <th scope="col">Montant</th>
             </tr>
           </thead>
-          <% tags.each do |tag| %>
+          <% @tags.each do |tag| %>
           <tbody>
             <tr>
               <td><%= tag %></td>
@@ -31,6 +28,6 @@
     <% end %>
   </div>
 </div>
-  <%= line_chart savings, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Epargne sur l'année", loading: "Loading..." %>
+  <%= line_chart @savings, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Epargne sur l'année", loading: "Loading..." %>
 
 

@@ -6,7 +6,11 @@ class AccountsController < ApplicationController
     @accounts = Account.where(user: current_user)
   end
 
-  def show; end
+  def show
+    @months = I18n.t("date.month_names").map!(&:capitalize)
+    @tags = @account.bank_transactions.map(&:tag).uniq
+    @savings = []
+  end
 
   def new
     @account = Account.new
