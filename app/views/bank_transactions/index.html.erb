@@ -38,4 +38,5 @@
     </table>
     <p><%= link_to 'Ajouter une transaction', new_account_bank_transaction_path, class: 'btn btn-primary' %></p>
   </div>
+  <%= paginate @bank_transactions %>
 </div>

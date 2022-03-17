@@ -3,7 +3,7 @@ class BankTransactionsController < ApplicationController
   before_action :find_bank_transaction, only: %i[edit update destroy]
 
   def index
-    @bank_transactions = BankTransaction.where(account_id: find_account).order('date desc')
+    @bank_transactions = BankTransaction.where(account_id: find_account).order('date desc').page(params[:page])
   end
 
   def new
