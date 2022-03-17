@@ -2,7 +2,7 @@
   <% savings = [] %>
   <% count_saving = 0 %>
   <% months = (I18n.t "date.month_names").map!(&:capitalize) %>
-  <% tags = ['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'] %>
+  <% tags = @account.bank_transactions.map(&:tag).uniq %>
   <div class="d-flex flex-wrap justify-content-between align-items-center">
     <% months.each_with_index do |month, id| %>
       <% saving = @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>
