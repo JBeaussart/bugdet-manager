@@ -4,6 +4,12 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  transition: 0.5s;
+}
+
+.navbar-lewagon.sticky {
+  background: rgb(246, 249, 255);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-lewagon .navbar-collapse {

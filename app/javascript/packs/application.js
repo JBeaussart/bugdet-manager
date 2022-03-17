@@ -15,6 +15,7 @@ ActiveStorage.start()
 import "controllers"
 import "bootstrap"
 
+// details btn account show
 const button = document.querySelector('.amount_month_tags_details')
 const amounts = document.querySelector('.amount_month_tags')
 
@@ -28,5 +29,12 @@ button.addEventListener('click', () => {
   }
 })
 
+// navbar animating
+window.addEventListener("scroll", function () {
+  const navbar = document.querySelector(".navbar-lewagon");
+  navbar.classList.toggle("sticky", window.scrollY > 50);
+});
+
+// chartjs
 require("chartkick")
 require("chart.js")
