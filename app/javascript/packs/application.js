@@ -12,29 +12,22 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-import "controllers"
-import "bootstrap"
-
-// details btn account show
-const button = document.querySelector('.amount_month_tags_details')
-const amounts = document.querySelector('.amount_month_tags')
-
-button.addEventListener('click', () => {
-  if (amounts.style.display === 'none') {
-    amounts.style.display = 'block';
-    button.innerHTML = 'Voir moins'
-  } else {
-    amounts.style.display = 'none'
-    button.innerHTML = 'Voir le detail'
-  }
-})
-
-// navbar animating
-window.addEventListener("scroll", function () {
-  const navbar = document.querySelector(".navbar-lewagon");
-  navbar.classList.toggle("sticky", window.scrollY > 50);
-});
-
 // chartjs
 require("chartkick")
 require("chart.js")
+
+// Custom js
+require("custom/navbar_scroll")
+require("custom/accounts/show/btn_see_details")
+
+import "controllers"
+import "bootstrap"
+import { navbarScroll } from "../custom/navbar_scroll"
+import { btnSeeMore } from '../custom/accounts/show/btn_see_details'
+
+
+
+document.addEventListener('turbolinks:load', () => {
+  navbarScroll();
+  btnSeeMore();
+})
