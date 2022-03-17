@@ -16,7 +16,7 @@
             </p>
           <% end %>
         </div>
-        <p class="account-card-fund">Solde: <%= account.fund.round(2) %>€</p>
+        <p class="account-card-fund <%= account.fund.round(2).positive? ? 'text-success' : 'text-danger' %>">Solde: <%= account.fund.round(2) %>€</p>
         <p class="account-card-btn-details"><%= link_to 'Détail', account_bank_transactions_path(account, account.bank_transactions), class: "btn btn-success" %></p>
       </div>
     <% end %>
