@@ -12,6 +12,11 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// chartjs
+require("chartkick")
+require("chart.js")
+
+// Custom js
 require("custom/navbar_scroll")
 require("custom/accounts/show/btn_see_details")
 
@@ -20,9 +25,6 @@ import "bootstrap"
 import { navbarScroll } from "../custom/navbar_scroll"
 import { btnSeeMore } from '../custom/accounts/show/btn_see_details'
 
-// chartjs
-require("chartkick")
-require("chart.js")
 
 
 document.addEventListener('turbolinks:load', () => {
