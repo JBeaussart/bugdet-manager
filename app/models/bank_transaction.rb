@@ -20,4 +20,6 @@ class BankTransaction < ApplicationRecord
     account.fund -= amount
     account.save
   end
+
+  paginates_per 15
 end
