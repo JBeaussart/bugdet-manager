@@ -1,5 +1,5 @@
 <div class="container devise-form">
-  <h2>Change your password</h2>
+  <h2>Changer votre mot de passe</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Change my password", class: 'btn btn-primary' %>
+      <%= f.button :submit, "Changer mot de passe", class: 'btn btn-primary' %>
     </div>
   <% end %>
 
