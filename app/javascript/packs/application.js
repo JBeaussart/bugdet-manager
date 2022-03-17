@@ -13,24 +13,12 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require("custom/navbar_scroll")
+require("custom/accounts/show/btn_see_details")
 
 import "controllers"
 import "bootstrap"
 import { navbarScroll } from "../custom/navbar_scroll"
-
-// details btn account show
-const button = document.querySelector('.amount_month_tags_details')
-const amounts = document.querySelector('.amount_month_tags')
-
-button.addEventListener('click', () => {
-  if (amounts.style.display === 'none') {
-    amounts.style.display = 'block';
-    button.innerHTML = 'Voir moins'
-  } else {
-    amounts.style.display = 'none'
-    button.innerHTML = 'Voir le detail'
-  }
-})
+import { btnSeeMore } from '../custom/accounts/show/btn_see_details'
 
 // chartjs
 require("chartkick")
@@ -39,4 +27,5 @@ require("chart.js")
 
 document.addEventListener('turbolinks:load', () => {
   navbarScroll();
+  btnSeeMore();
 })
