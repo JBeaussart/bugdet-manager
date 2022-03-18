@@ -6,7 +6,7 @@
       <% if saving != 0 %>
         <% @savings << [month, (count_saving += saving)] %>
         <div class="amount_month_tags_details_card mb-3">
-          <h5 class="<%= saving.positive? ? 'text-success' : 'text-warning' %>">Epargne <%= month %>: <%= saving %>€</h5>
+          <h5 class="<%= saving.positive? ? 'text-success' : 'text-warning' %>">Epargne <%= month %>: <%= saving.round(2) %>€</h5>
           <table class="table">
             <thead>
               <tr>
