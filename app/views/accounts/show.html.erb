@@ -9,40 +9,32 @@
 
   <hr>
 
+  <%= render 'shared/accounts/show/total_saving' %>
+  <%= render 'shared/accounts/show/graph_saving' %>
+
+  <br>
+  <br>
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
       <h3>Total annuel par catégories</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Catégorie</th>
-              <th scope="col">Total annuel</th>
-              <th scope="col">Moyenne mensuelle</th>
-            </tr>
-          </thead>
-        <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
-          <tbody>
-            <tr>
-              <td><%= tag %></td>
-              <td><%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</td>
-              <td><%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round %>€</td>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
-      <div>
-        <% @account.bank_transactions.each do |el| %>
-          <% if el.amount.positive? %>
-            <% @revenu += el.amount %>
-          <% else %>
-            <% @depense += el.amount %>
-          <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Total annuel</th>
+            <th scope="col">Moyenne mensuelle</th>
+          </tr>
+        </thead>
+      <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
+        <tbody>
+          <tr>
+            <td><%= tag %></td>
+            <td><%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</td>
+            <td><%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round %>€</td>
+          </tr>
+        </tbody>
         <% end %>
-        <p>Revenu annuel: <%= @revenu %>€</p>
-        <p>Dépense annuelle: <%= @depense %>€</p>
-        <hr>
-        <p>Epargne: <%= @revenu + @depense %>€</p>
-      </div>
+      </table>
     </div>
 
     <div>
@@ -57,8 +49,8 @@
       <%= pie_chart(tag_percentage, legend: false, width: "700px", height: "770px", library: {backgroundColor: "#F4F4F4"}, title: "Pourcentage par catégories", loading: "Loading...") %>
     </div>
   </div>
-  <%= render 'shared/accounts/show/graph_saving' %>
-  <%= render 'shared/accounts/show/saving' %>
+
+  <%= render 'shared/accounts/show/saving_by_tag' %>
 
   <div class="text-center">
     <p class="my-4 amount_month_tags_details btn btn-primary">Voir détails</p>

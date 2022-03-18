@@ -1,0 +1,12 @@
+<div>
+  <% @account.bank_transactions.each do |el| %>
+    <% if el.amount.positive? %>
+      <% @revenu += el.amount %>
+    <% else %>
+      <% @depense += el.amount %>
+    <% end %>
+  <% end %>
+  <p>Revenu annuel: <%= @revenu %>€</p>
+  <p>Dépense annuelle: <%= @depense %>€</p>
+  <p>Epargne: <%= @revenu + @depense %>€</p>
+</div>
