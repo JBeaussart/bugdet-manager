@@ -1,27 +1,20 @@
-<% months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'] %>
-<% savings = [] %>
-<% months.each_with_index do |month, id| %>
+<% @months.each_with_index do |month, id| %>
   <% @accounts.each do |account| %>
     <% saving = account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>
     <% if saving != 0 %>
-      <% savings << [month, saving] %>
+      <% @savings << [month, saving] %>
     <% end %>
   <% end %>
 <% end %>
 
-
-
-<% filter_savings = [] %>
-<% fund_savings = [] %>
-<% add_amount = 0 %>
-<% savings.group_by(&:first).map do |month, amount| %>
-  <% filter_savings << [month, [*amount.map(&:last)].sum] %>
+<% @savings.group_by(&:first).map do |month, amount| %>
+  <% @filter_savings << [month, [*amount.map(&:last)].sum] %>
 <% end %>
 
-<% filter_savings.each do |filter_saving| %>
-  <% add_amount += filter_saving[1] %>
-  <% fund_savings << [filter_saving[0], add_amount] %>
+<% @filter_savings.each do |filter_saving| %>
+  <% @add_amount += filter_saving[1] %>
+  <% @fund_savings << [filter_saving[0], @add_amount] %>
 <% end %>
 
 <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-<%= line_chart fund_savings, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Evolution de votre épargne" %>
+<%= line_chart @fund_savings, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Evolution de votre épargne" %>
