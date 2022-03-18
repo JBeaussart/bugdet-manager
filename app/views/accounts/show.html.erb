@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <h3><%= @account.name %> <span class='h6'>(<%= link_to 'Editer le compte', edit_account_path %> - <%= link_to 'Supprimer le compte', account_path(@account), method: 'delete' %>)</span></h3>
@@ -7,24 +8,26 @@
     <p><%= link_to 'Ajouter une transaction', new_account_bank_transaction_path(@account), class:'btn btn-primary' %></p>
   </div>
 
-  <hr>
+  <hr class="my-5">
 
-  <h4 class='my-5'>Vue générale</h4>
-  <div class="d-flex justify-content-between align-items-center">
+  <h4>Vue générale</h4>
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <%= render 'shared/accounts/show/total_saving' %>
     <%= render 'shared/accounts/show/total_saving_year' %>
   </div>
 
-  <h4 class='mt-5'>Vue par catégories</h4>
-  <div class="d-flex justify-content-between align-items-center">
+  <hr class="my-5">
+
+  <h4>Vue par catégories</h4>
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <%= render 'shared/accounts/show/table_by_tag' %>
     <%= render 'shared/accounts/show/percentage_by_tag' %>
   </div>
 
-
-  <div class="text-center">
-    <p class="my-4 amount_month_tags_details btn btn-primary">Voir détails</p>
+  <div class="text-center mb-4">
+    <p class="amount_month_tags_details btn btn-primary">Voir détails</p>
+    <%= render 'shared/accounts/show/saving_by_tag' %>
   </div>
-  <%= render 'shared/accounts/show/saving_by_tag' %>
+
 </div>
 
