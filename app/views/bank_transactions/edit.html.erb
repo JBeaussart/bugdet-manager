@@ -8,9 +8,9 @@
         <%= f.input :amount, label: 'Montant' %>
         <div class="d-flex flex-column w-100 my-4">
           <% if f.object.tag == "" %>
-            <%= f.select :tag, options_for_select(['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre']), include_blank: "Selectionner un categorie" %>
+            <%= f.select :tag, options_for_select(@tags), include_blank: "Selectionner un categorie" %>
           <% else %>
-            <%= f.select :tag, options_for_select(['Revenu', 'Logement', 'Vacances', 'Voiture', 'Abonnement', 'Animaux', 'Santé', 'Loisir', 'CB', 'Autre'], selected: f.object.tag) %>
+            <%= f.select :tag, options_for_select(@tags, selected: f.object.tag) %>
           <% end %>
         </div>
         <%= f.input :comment, label: 'Ajouter un commentaire' %>

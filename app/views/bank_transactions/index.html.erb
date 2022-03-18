@@ -25,7 +25,7 @@
             <th scope="row"><%= bank_transaction.date.strftime("%d/%m/%Y") %></th>
           <% end %>
           <td><%= bank_transaction.amount %>€</td>
-          <td><%= bank_transaction.tag %></td>
+          <td style="background-color: #<%= @tags_color['color']["#{bank_transaction.tag}"] %>"><%= bank_transaction.tag %></td>
           <td class="bank-transaction-comment"><%= bank_transaction.comment %></td>
           <td class="text-center">
             <%= link_to edit_account_bank_transaction_path(bank_transaction.account_id, bank_transaction.id) do %>
