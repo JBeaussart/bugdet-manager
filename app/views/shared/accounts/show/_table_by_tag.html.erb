@@ -11,7 +11,7 @@
     <tbody>
       <tr>
         <td><%= tag %></td>
-        <td><%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</td>
+        <td><%= @account.bank_transactions.where(tag: tag).sum(&:amount).round(2) %>€</td>
         <td><%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round %>€</td>
       </tr>
     </tbody>
