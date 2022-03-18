@@ -7,6 +7,7 @@ class BankTransactionsController < ApplicationController
   end
 
   def new
+    transaction_tags
     @bank_transaction = BankTransaction.new
   end
 
@@ -20,7 +21,9 @@ class BankTransactionsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    transaction_tags
+  end
 
   def update
     @bank_transaction.update(bank_transaction_params)
@@ -33,6 +36,10 @@ class BankTransactionsController < ApplicationController
   end
 
   private
+
+  def transaction_tags
+    @tags = @account.bank_transactions.map(&:tag).uniq
+  end
 
   def bank_transaction_params
     params.require(:bank_transaction).permit(:date, :amount, :tag, :comment)
