@@ -15,25 +15,16 @@
     <%= render 'shared/accounts/show/total_saving_year' %>
   </div>
 
-  <%= render 'shared/accounts/show/table_by_tag' %>
-
-    <div>
-      <% tag_percentage = [] %>
-      <% @account.bank_transactions.map(&:tag).uniq.map do |tag| %>
-        <% if @account.bank_transactions.where(tag: tag).sum(&:amount).negative? %>
-          <% average = (@account.bank_transactions.where(tag: tag).sum(&:amount) * 100 / @depense).round %>
-          <% tag_percentage << [tag, average] %>
-        <% end %>
-      <% end %>
-      <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-      <%= pie_chart(tag_percentage, legend: false, width: "700px", height: "600px", library: {backgroundColor: "#F4F4F4"}, title: "Pourcentage par catégories", loading: "Loading...", donut: true) %>
-    </div>
+  <h4 class='mt-5'>Vue par catégories</h4>
+  <div class="d-flex justify-content-between align-items-center">
+    <%= render 'shared/accounts/show/table_by_tag' %>
+    <%= render 'shared/accounts/show/percentage_by_tag' %>
   </div>
 
-  <%= render 'shared/accounts/show/saving_by_tag' %>
 
   <div class="text-center">
     <p class="my-4 amount_month_tags_details btn btn-primary">Voir détails</p>
   </div>
+  <%= render 'shared/accounts/show/saving_by_tag' %>
 </div>
 
