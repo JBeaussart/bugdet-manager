@@ -3,6 +3,7 @@ class BankTransactionsController < ApplicationController
   before_action :find_bank_transaction, only: %i[edit update destroy]
 
   def index
+    access_tags_yml
     @bank_transactions = BankTransaction.where(account_id: find_account).order('date desc').page(params[:page])
   end
 
@@ -36,6 +37,10 @@ class BankTransactionsController < ApplicationController
   end
 
   private
+
+  def access_tags_yml
+    @tags_color = YAML.load_file('config/tags.yml')
+  end
 
   def transaction_tags
     @tags = @account.bank_transactions.map(&:tag).uniq
