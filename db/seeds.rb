@@ -1,4 +1,4 @@
-require 'faker'
+# require 'faker'
 
 puts '---------------------'
 puts 'Cleaning database'
