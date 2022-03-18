@@ -4,7 +4,6 @@
       <div class="col-6 m-auto w-50 rounded p-4 border bg-transparen">
         <h3 class="title-new-equipment mb-3 font-weight-bold">Ajouter une transaction</h3>
         <%= simple_form_for [ @account, @bank_transaction ] do |f| %>
-        <% binding.pry %>
         <%= f.input :date, as: :date, html5: true %>
         <%= f.input :amount, label: 'Montant' %>
         <div class="d-flex flex-column w-100 my-4">
