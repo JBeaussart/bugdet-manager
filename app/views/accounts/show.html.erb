@@ -7,6 +7,8 @@
     <p><%= link_to 'Ajouter une transaction', new_account_bank_transaction_path(@account), class:'btn btn-primary' %></p>
   </div>
 
+  <hr>
+
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
       <h3>Total annuel par catégories</h3>
@@ -58,7 +60,9 @@
   <%= render 'shared/accounts/show/graph_saving' %>
   <%= render 'shared/accounts/show/saving' %>
 
-  <div class="my-4 amount_month_tags_details btn btn-primary">Voir le detail</div>
+  <div class="text-center">
+    <p class="my-4 amount_month_tags_details btn btn-primary">Voir détail</p>
+  </div>
 
 
 </div>
