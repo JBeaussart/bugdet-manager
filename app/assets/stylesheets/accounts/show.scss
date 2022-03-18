@@ -9,9 +9,9 @@
   }
 }
 
-// .amount_month_tags {
-//   display: none;
-// }
+.amount_month_tags {
+  display: none;
+}
 
 .amount_month_tags_details_card {
   border: 1px solid lightgrey;
@@ -22,9 +22,5 @@
 }
 
 .amount_month_tags_details_card:hover {
-  background-color: rgb(36, 36, 36);
-
-  table {
-    color: white;
-  }
+  background-color: #EDF0F5;
 }
