@@ -4,9 +4,9 @@
 
   <% if user_signed_in? %>
     <h3 class="text-center">Disponible sur vos comptes: <%= @accounts.sum(&:fund).round(2) %>€</h3>
+    <%= render 'shared/accounts/index/graph' %>
+    <%= render 'shared/accounts/index/card' %>
   <% end %>
 
-  <%= render 'shared/accounts/index/graph' %>
-  <%= render 'shared/accounts/index/card' %>
 
 </div>
