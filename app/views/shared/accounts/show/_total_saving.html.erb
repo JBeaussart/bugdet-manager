@@ -6,7 +6,6 @@
       <% @depense += el.amount %>
     <% end %>
   <% end %>
-  <p>Revenu annuel: <%= @revenu %>€</p>
-  <p>Dépense annuelle: <%= @depense %>€</p>
-  <p>Epargne: <%= @revenu + @depense %>€</p>
 </div>
+
+<%= pie_chart [['revenu', @revenu], ['dépense', @depense.abs]], ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Revenu / Dépense", loading: "Loading..." %>

@@ -9,14 +9,15 @@
 
   <hr>
 
-  <%= render 'shared/accounts/show/total_saving' %>
-  <%= render 'shared/accounts/show/graph_saving' %>
+  <h4 class='my-5'>Vue générale</h4>
+  <div class="d-flex justify-content-between align-items-center">
+    <%= render 'shared/accounts/show/total_saving' %>
+    <%= render 'shared/accounts/show/graph_saving' %>
+  </div>
 
-  <br>
-  <br>
   <div class="d-flex justify-content-between">
     <div class="amount_tags">
-      <h3>Total annuel par catégories</h3>
+      <h4>Total annuel par catégories</h4>
       <table class="table">
         <thead>
           <tr>
@@ -46,7 +47,7 @@
         <% end %>
       <% end %>
       <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-      <%= pie_chart(tag_percentage, legend: false, width: "700px", height: "770px", library: {backgroundColor: "#F4F4F4"}, title: "Pourcentage par catégories", loading: "Loading...") %>
+      <%= pie_chart(tag_percentage, legend: false, width: "700px", height: "770px", library: {backgroundColor: "#F4F4F4"}, title: "Pourcentage par catégories", loading: "Loading...", donut: true) %>
     </div>
   </div>
 
