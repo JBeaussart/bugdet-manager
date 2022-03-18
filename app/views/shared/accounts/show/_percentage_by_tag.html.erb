@@ -1,0 +1,11 @@
+<div>
+  <% tag_percentage = [] %>
+  <% @account.bank_transactions.map(&:tag).uniq.map do |tag| %>
+    <% if @account.bank_transactions.where(tag: tag).sum(&:amount).negative? %>
+      <% average = (@account.bank_transactions.where(tag: tag).sum(&:amount) * 100 / @depense).round %>
+      <% tag_percentage << [tag, average] %>
+    <% end %>
+  <% end %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+  <%= pie_chart(tag_percentage, legend: false, width: "700px", height: "600px", library: {backgroundColor: "#F4F4F4"}, title: "Pourcentage par catégories", loading: "Loading...", donut: true) %>
+</div>

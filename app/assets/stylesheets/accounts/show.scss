@@ -1,12 +1,7 @@
 .amount_tags {
-  // border: 1px solid lightgrey;
-  width: 35em;
-  height: 48em;
   padding: 3em;
   color: rgba(40,40,40,1);
   position: relative;
-  // box-shadow: 1px 2px 2px lightgrey;
-  // border-radius: 5px;
 
   p {
     font-size: 20px;
@@ -14,18 +9,22 @@
   }
 }
 
-.amount_month_tags {
-  display: none;
-}
+// .amount_month_tags {
+//   display: none;
+// }
 
 .amount_month_tags_details_card {
   border: 1px solid lightgrey;
-  width: 25em;
-  height: 40em;
-  height: auto;
-  padding: 3em;
-  color: rgba(40,40,40,1);
-  position: relative;
-  // box-shadow: 1px 2px 2px lightgrey;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  padding: 2em;
   border-radius: 5px;
+  transition: 0.5s;
+}
+
+.amount_month_tags_details_card:hover {
+  background-color: rgb(36, 36, 36);
+
+  table {
+    color: white;
+  }
 }

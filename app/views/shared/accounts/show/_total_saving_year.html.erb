@@ -1,0 +1,9 @@
+<% @months.each_with_index do |month, id| %>
+  <% count_saving = 0 %>
+  <% saving = @account.bank_transactions.where('extract(month from date) = ?', id + 1).sum(&:amount) %>
+  <% if saving != 0 %>
+    <% @savings << [month, (count_saving += saving)] %>
+  <% end %>
+<% end %>
+
+<%= line_chart @savings, xtitle: "Mois", ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Epargne sur l'année", loading: "Loading..." %>

@@ -1,0 +1,11 @@
+<div>
+  <% @account.bank_transactions.each do |el| %>
+    <% if el.amount.positive? %>
+      <% @revenu += el.amount %>
+    <% else %>
+      <% @depense += el.amount %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= pie_chart [['revenu', @revenu], ['dépense', @depense.abs]], ytitle: "Euros", library: {backgroundColor: "#F4F4F4"}, title: "Revenu / Dépense", loading: "Loading..." %>

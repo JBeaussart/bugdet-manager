@@ -1,0 +1,20 @@
+<div class="amount_tags">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Total annuel</th>
+        <th scope="col">Moyenne mensuelle</th>
+      </tr>
+    </thead>
+  <% @account.bank_transactions.map(&:tag).uniq.each do |tag| %>
+    <tbody>
+      <tr>
+        <td><%= tag %></td>
+        <td><%= @account.bank_transactions.where(tag: tag).sum(&:amount) %>€</td>
+        <td><%= (@account.bank_transactions.where(tag: tag).sum(&:amount) / @account.bank_transactions.where(tag: tag).count).round %>€</td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div>
