@@ -15,7 +15,7 @@
     <%= render 'shared/accounts/show/total_saving' %>
     <%= render 'shared/accounts/show/total_saving_year' %>
   </div>
-  <h5 class="mt-4">Epargne sur l'année: <%= @revenu + @depense %>€</h5>
+  <h5 class="mt-4">Epargne sur l'année: <%= (@revenu + @depense).round(2) %>€</h5>
 
 
   <hr class="my-5">
