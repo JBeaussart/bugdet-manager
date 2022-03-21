@@ -8,7 +8,7 @@ BankTransaction.destroy_all
 
 puts '---------------------'
 puts 'Creating Users'
-user1 = User.create!(email: 'user@gmail.com', password: '123456', first_name: 'Jérémy', last_name: 'bst')
+user1 = User.create!(email: 'user@gmail.com', password: '123456')
 
 # puts '---------------------'
 # puts 'Creating Accounts & BankTransactions'
